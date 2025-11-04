@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kriyu — Ngemil Sehat Gak Harus Ngebosenin</title>
+  <meta name="description" content="Kriyu — snack ubi sehat: tanpa pengawet, digoreng tanpa minyak, ubi lokal dari petani Indonesia." />
+
+  <!-- Simple, lightweight styling (single-file). Images should be provided as optimized WebP in production. -->
+  <style>
+    :root{
+      --bg:#fff8f2;
+      --accent:#f6a623; /* madu/orange */
+      --muted:#6b6b6b;
+      --card:#fff;
+      --glass: rgba(255,255,255,0.8);
+      --radius:16px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#222;line-height:1.4}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;background:transparent;position:sticky;top:0;z-index:40}
+    .logo{display:flex;align-items:center;gap:12px;font-weight:700;font-size:20px;color:#1f1f1f}
+    .logo .mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#ffd27a,#ff9f43);display:flex;align-items:center;justify-content:center;color:#713f05;font-weight:800}
+    .cta-btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr;gap:20px;padding:28px 20px;align-items:center}
+    .hero-inner{display:flex;flex-direction:column;gap:18px;max-width:720px}
+    .headline{font-size:28px;font-weight:800}
+    .sub{color:var(--muted)}
+    .hero-visual{display:flex;align-items:center;justify-content:center}
+    .product-card{width:100%;max-width:520px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,0.7),rgba(255,255,255,0.9));padding:12px;box-shadow:0 8px 30px rgba(30,30,30,0.08)}
+    .product-card img{width:100%;height:auto;display:block;border-radius:12px}
+
+    .kegunaan{display:flex;gap:12px;flex-wrap:wrap}
+    .feature{background:var(--card);padding:12px;border-radius:12px;display:flex;gap:10px;align-items:center;min-width:180px;box-shadow:0 6px 20px rgba(20,20,20,0.04)}
+    .feature svg{width:34px;height:34px}
+
+    /* Varian */
+    .variants{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;padding:20px}
+    .variant{background:var(--card);padding:14px;border-radius:14px;text-align:center;box-shadow:0 8px 20px rgba(10,10,10,0.04)}
+    .variant img{width:100%;height:140px;object-fit:cover;border-radius:12px}
+    .variant h4{margin:10px 0 6px}
+
+    /* Testimoni */
+    .testi-wrap{padding:20px}
+    .testi-slider{display:flex;overflow:hidden;gap:12px}
+    .testi{min-width:280px;background:var(--card);padding:14px;border-radius:12px;box-shadow:0 8px 18px rgba(10,10,10,0.05);display:flex;gap:12px;align-items:flex-start}
+    .testi img{width:56px;height:56px;border-radius:50%;object-fit:cover}
+    .stars{color:gold}
+
+    /* CTA final */
+    .final-cta{display:flex;gap:12px;align-items:center;padding:20px;justify-content:center}
+    .btn-shop{background:#fff;border:2px solid var(--accent);padding:10px 14px;border-radius:12px;text-decoration:none;font-weight:700}
+
+    /* Footer */
+    footer{padding:18px 20px;background:transparent;border-top:1px solid rgba(0,0,0,0.04);display:flex;flex-direction:column;gap:10px}
+    .socials{display:flex;gap:12px}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* Sticky floating CTA (non-intrusive) */
+    .floating-cta{position:fixed;right:18px;bottom:18px;z-index:60}
+
+    /* Checkout modal (3-step) */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.35);z-index:80}
+    .modal.open{display:flex}
+    .modal-card{width:100%;max-width:520px;background:var(--card);border-radius:14px;padding:18px}
+    .step{display:none}
+    .step.active{display:block}
+    .steps-ind{display:flex;gap:8px;margin-bottom:12px}
+    .step-dot{width:10px;height:10px;border-radius:50%;background:#eee}
+    .step-dot.active{background:var(--accent)}
+
+    /* Responsive */
+    @media(min-width:900px){
+      .hero{grid-template-columns:1fr 1fr;padding:52px}
+      .headline{font-size:36px}
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <div class="mark">K</div>
+      <div>
+        <div>Kriyu</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">Snack Ubi Sehat</div>
+      </div>
+    </div>
+    <nav>
+      <a class="cta-btn" href="#" id="open-checkout">Pesan Sekarang</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <h1 class="headline">Ngemil Sehat Gak Harus Ngebosenin.</h1>
+        <p class="sub">Kriyu — keripik ubi yang renyah, digoreng tanpa minyak, dibuat dari ubi lokal petani Indonesia dan bumbu alami.</p>
+
+        <div style="display:flex;gap:10px;align-items:center">
+          <a class="cta-btn" href="#" id="hero-cta">Coba Sekarang</a>
+          <a class="btn-shop" href="#variants">Lihat Varian</a>
+        </div>
+
+        <div class="kegunaan" aria-hidden="false">
+          <div class="feature">
+            <!-- icon: no-preservative -->
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.134 2 5 5.134 5 9c0 3.866 3.134 7 7 7s7-3.134 7-7c0-3.866-3.134-7-7-7Zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10Z" fill="currentColor"/></svg>
+            <div>
+              <div style="font-weight:700">Tanpa Pengawet</div>
+              <div style="font-size:13px;color:var(--muted)">Lebih aman & alami</div>
+            </div>
+          </div>
+
+          <div class="feature">
+            <!-- icon: air-fried -->
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 13h16v2H4zM6 6h12v2H6zM8 10h8v2H8z" fill="currentColor"/></svg>
+            <div>
+              <div style="font-weight:700">Digoreng tanpa minyak</div>
+              <div style="font-size:13px;color:var(--muted)">Tekstur renyah, lebih sehat</div>
+            </div>
+          </div>
+
+          <div class="feature">
+            <!-- icon: local -->
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3 6 6 .5-4.5 3 1.5 6L12 16 5.5 17.5 7 11 2.5 8 8.5 6z" fill="currentColor"/></svg>
+            <div>
+              <div style="font-weight:700">Ubi lokal</div>
+              <div style="font-size:13px;color:var(--muted)">Dari petani Indonesia</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Varian Rasa -->
+    <section id="variants">
+      <h2 style="padding:0 20px 6px">Varian Rasa</h2>
+      <div class="variants">
+        <article class="variant">
+          <img src="ubi1.jpg" alt="Ubi Madu" loading="lazy">
+          <h4>Ubi Madu</h4>
+          <p class="small">Manis alami, cocok untuk penggemar rasa lembut.</p>
+          <div style="margin-top:10px"><button class="cta-btn" data-variant="Ubi Madu">Pesan Ubi Madu</button></div>
+        </article>
+
+        <article class="variant">
+          <img src="ubi2.jpg" alt="Ubi Balado" loading="lazy">
+          <h4>Ubi Balado</h4>
+          <p class="small">Pedas gurih, bikin nagih.</p>
+          <div style="margin-top:10px"><button class="cta-btn" data-variant="Ubi Balado">Pesan Ubi Balado</button></div>
+        </article>
+
+        <article class="variant">
+          <img src="ubi3.jpg" alt="Ubi Keju" loading="lazy">
+          <h4>Ubi Keju</h4>
+          <p class="small">Gurih creamy, favorit anak-anak.</p>
+          <div style="margin-top:10px"><button class="cta-btn" data-variant="Ubi Keju">Pesan Ubi Keju</button></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Testimoni -->
+    <section class="testi-wrap">
+      <h3 style="padding:0 20px">Testimoni Pelanggan</h3>
+      <div style="padding:10px 20px">
+        <div class="testi-slider" id="testi-slider">
+          <div class="testi">
+            <img src="testi1.jpg" alt="Dita - Surabaya">
+            <div>
+              <div style="font-weight:700">Dita, Surabaya</div>
+              <div class="small stars">⭐⭐⭐⭐⭐</div>
+              <p class="small">Renyah banget, gak berminyak sama sekali! Favoritku: Ubi Balado.</p>
+            </div>
+          </div>
+
+          <div class="testi">
+            <img src="testi2.jpeg" alt="goblin - Bandung">
+            <div>
+              <div style="font-weight:700">goblin, Bandung</div>
+              <div class="small stars">⭐⭐⭐⭐⭐⭐⭐</div>
+              <p class="small">Pas banget buat ngemil sore-sore sambil hisap ethanol. Rasa manisnya seimbang.</p>
+            </div>
+          </div>
+
+          <div class="testi">
+            <img src="testi3.jpeg" alt="ironi - Jakarta">
+            <div>
+              <div style="font-weight:700">Ironi, Jakarta</div>
+              <div class="small stars">⭐⭐⭐⭐</div>
+              <p class="small">Packing rapi, sampai di kota dengan kondisi bagus duh jadi pengen kecup penjualnya.</p>
+            </div>
+          </div>
+          <div class="testi">
+            <img src="testi4.jpeg" alt="Rusdi - Ngawi">
+            <div>
+              <div style="font-weight:700">Rusdi, Ngawi</div>
+              <div class="small stars">⭐⭐⭐⭐⭐⭐⭐⭐⭐</div>
+              <p class="small">ubinya muantap cik anak anak sampek nambah loh rek.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section style="padding:10px 20px">
+      <div class="final-cta">
+        <div style="text-align:center">
+          <div style="font-weight:800;font-size:18px">Pesan Sekarang di Shopee atau WhatsApp!</div>
+          <div style="margin-top:10px;display:flex;gap:10px;justify-content:center">
+            <a class="cta-btn" href="https://shopee.co.id" target="_blank" rel="noopener">Beli di Shopee</a>
+            <a class="btn-shop" href="https://wa.me/628123456789" target="_blank" rel="noopener">Chat WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating CTA -->
+  <div class="floating-cta">
+    <a class="cta-btn" href="#" id="float-cta">Pesan Sekarang</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+      <div>
+        <div style="font-weight:700">Kriyu</div>
+        <div class="small">Snack Ubi Sehat • © 2025</div>
+      </div>
+      <div class="socials">
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">FAQ</a>
+      </div>
+    </div>
+
+    <div style="margin-top:10px" class="small">Kontak: <a href="mailto:hello@kriyu.id">hello@kriyu.id</a> • Telp: 0812-3456-789</div>
+  </footer>
+
+  <!-- Checkout modal: 3-step -->
+  <div class="modal" id="checkout-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-weight:800">Checkout</div>
+        <button id="close-modal" aria-label="tutup">✕</button>
+      </div>
+
+      <div class="steps-ind" style="margin-top:10px">
+        <div class="step-dot" data-stepdot="0"></div>
+        <div class="step-dot" data-stepdot="1"></div>
+        <div class="step-dot" data-stepdot="2"></div>
+      </div>
+
+      <form id="checkout-form">
+        <div class="step active" data-step="0">
+          <h4>Pilih Varian</h4>
+          <select name="variant" required style="width:100%;padding:10px;border-radius:8px;margin-top:8px">
+            <option value="">-- Pilih varian --</option>
+            <option>Ubi Madu</option>
+            <option>Ubi Balado</option>
+            <option>Ubi Keju</option>
+          </select>
+        </div>
+
+        <div class="step" data-step="1">
+          <h4>Isi Data</h4>
+          <input name="name" placeholder="Nama lengkap" required style="width:100%;padding:10px;border-radius:8px;margin-top:8px;display:block">
+          <input name="phone" placeholder="No. HP" required style="width:100%;padding:10px;border-radius:8px;margin-top:8px;display:block">
+          <textarea name="address" placeholder="Alamat pengiriman" required style="width:100%;padding:10px;border-radius:8px;margin-top:8px;display:block"></textarea>
+        </div>
+
+        <div class="step" data-step="2">
+          <h4>Bayar</h4>
+          <p class="small">Pilih metode pembayaran (simulasi)</p>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <label style="flex:1"><input type="radio" name="pay" value="transfer" checked> Transfer</label>
+            <label style="flex:1"><input type="radio" name="pay" value="cod"> COD</label>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px">
+          <button type="button" id="prev-step" class="btn-shop">Kembali</button>
+          <button type="button" id="next-step" class="cta-btn">Lanjut</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Minimal JS: slider, modal, checkout stepper -->
+  <script>
+    // Testimoni slider: simple auto-scroll
+    (function(){
+      const slider = document.getElementById('testi-slider');
+      if(!slider) return;
+      let pos = 0;
+      const step = 296; // approx card width + gap
+      function tick(){
+        pos += step;
+        if(pos > slider.scrollWidth - slider.clientWidth) pos = 0;
+        slider.scrollTo({left:pos,behavior:'smooth'});
+      }
+      let t = setInterval(tick,3500);
+      slider.addEventListener('mouseenter', ()=>clearInterval(t));
+      slider.addEventListener('mouseleave', ()=>t=setInterval(tick,3500));
+    })();
+
+    // Modal & checkout stepper
+    (function(){
+      const modal = document.getElementById('checkout-modal');
+      const openBtns = document.querySelectorAll('#open-checkout, #hero-cta, #float-cta');
+      const closeBtn = document.getElementById('close-modal');
+      const steps = Array.from(document.querySelectorAll('.step'));
+      const dots = Array.from(document.querySelectorAll('.step-dot'));
+      let cur = 0;
+
+      function openModal(){ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); updateSteps(); }
+      function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
+      openBtns.forEach(b=>b.addEventListener('click', (e)=>{ e.preventDefault(); openModal(); }));
+      closeBtn.addEventListener('click', closeModal);
+
+      function updateSteps(){
+        steps.forEach((s,i)=>s.classList.toggle('active', i===cur));
+        dots.forEach((d,i)=>d.classList.toggle('active', i===cur));
+        document.getElementById('prev-step').style.display = cur===0? 'none':'inline-block';
+        document.getElementById('next-step').textContent = cur===steps.length-1? 'Bayar & Selesai':'Lanjut';
+      }
+
+      document.getElementById('next-step').addEventListener('click', ()=>{
+        if(cur < steps.length-1){
+          // basic validation for required fields in current step
+          const inputs = steps[cur].querySelectorAll('[required]');
+          for(const inp of inputs){ if(!inp.value){ inp.focus(); return; } }
+          cur++; updateSteps();
+        } else {
+          // final submit (simulated)
+          const data = new FormData(document.getElementById('checkout-form'));
+          // In production: send to server
+          alert('Terima kasih! Pesanan Anda sudah dicatat (simulasi).\nKami akan menghubungi melalui WhatsApp untuk konfirmasi.');
+          closeModal();
+          document.getElementById('checkout-form').reset();
+          cur = 0; updateSteps();
+        }
+      });
+
+      document.getElementById('prev-step').addEventListener('click', ()=>{ if(cur>0) cur--; updateSteps(); });
+
+      // quick variant buttons
+      document.querySelectorAll('[data-variant]').forEach(b=>{
+        b.addEventListener('click', (e)=>{
+          const v = e.currentTarget.getAttribute('data-variant');
+          openModal();
+          const sel = document.querySelector('select[name="variant"]');
+          if(sel) sel.value = v;
+        });
+      });
+
+      updateSteps();
+    })();
+
+    // Accessibility: close modal with ESC
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ const modal = document.getElementById('checkout-modal'); if(modal.classList.contains('open')) modal.classList.remove('open'); } });
+  </script>
+</body>
+</html>
